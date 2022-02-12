@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <style>
+
+            body{
+                background-image: linear-gradient( 44.8deg,  rgba(255,136,102,0.67) -53.1%, rgba(255,221,136,0.28) 49% );
+    
+            }
+
+            .body_content{
+                margin: 10px;
+                padding :20px;
+                align-items: center;
+            }
+
+
+            .body_content h1{
+                font-style:italic ;
+            }
+
+            .body_content img {
+                justify-content: center;
+                width: 500px;
+                height:150px;
+            }
+            .text{
+                padding: 25px;
+                width: 650px;
+                height: 200px;
+                font-size: 25px;
+                border-radius: 15px;
+                font-style: italic;
+            }
+            .text:hover{
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+            
+            .button button{
+                margin: 20px;
+                background-color: #e9e2ec;
+
+            }
+            
+
+        </style>
+        <title>Amazon Review Sentiment Analysis</title>
+        </head>
+        <body>
+
+            <div class = "body_content">
+
+                <center><img src = "https://pngimg.com/uploads/amazon/amazon_PNG24.png"> 
+                <h1>Sentiment Analysis</h1>
+                </center>  
+
+
+            </div>
+
+            <center>
+                <textarea class="text" placeholder="Enter Reviews Here...." name="a" id="a"></textarea>
+            </center>
+
+            <center >
+
+                <div class="button">
+                    <input type="button" value="Submit" onclick="SubmitValue()">
+                    <input type="reset" value="Clear" >
+                </div>
+
+                <center>
+                    <div class = "output">
+                    </div>
+                </center>
+                
+            </center>
+            </div>
+            <h2 id="Data_value"></h2>
+            <h2 id="Data_pred"></h2>
+    </div>
+    <script>
+        function SubmitValue(){
+              var rv = document.getElementById('a').value;
+              fetch('/Predict/'+rv)
+              .then(response => response.json())
+              .then(showData);
+          }
+
+          function showData(data){
+            console.log(data.pred)
+            document.getElementById("Data_value").innerText=data.pred
+            const pred_val = data.pred
+            if(pred_val =='1')
+            {
+              document.getElementById("Data_pred").innerHTML="<h1>&#128514</h1>";
+            }
+            else
+            {
+              document.getElementById("Data_pred").innerHTML="<h1>&#128542</h1>";
+            }
+        }
+          
+      </script>
+</body>
+
+</html>
+
+           
